@@ -25,14 +25,14 @@ namespace AdventOfCode
             int sum = 0;
             foreach (var group in inputList)
             {
-                contains = new HashSet<char>(group.Split("\n").Select(e=>e.ToCharArray()).SelectMany(x => x));
+                contains = new HashSet<char>(group.Split("\n",StringSplitOptions.RemoveEmptyEntries).Select(e=>e.ToCharArray()).SelectMany(x => x));
                 
                 if (!solutionTwo) sum += contains.Count;
                 else
                 {
                     foreach (var character in contains)
                     {
-                        if (group.Count(e => e == character) == group.Split("\n").Count()) sum++;
+                        if (group.Count(e => e == character) == group.Split("\n",StringSplitOptions.RemoveEmptyEntries).Count()) sum++;
                     }
                 }
             }
