@@ -21,18 +21,12 @@ namespace AdventOfCode
         {
             var inputList = _input.Split("\n\n",
                 StringSplitOptions.RemoveEmptyEntries).ToList();
-            var contains = new HashSet<char>();
+            HashSet<char> contains;
             int sum = 0;
             foreach (var group in inputList)
             {
-                foreach (var value in group.Split("\n"))
-                {
-                    foreach (var character in value)
-                    {
-                        contains.Add(character);
-                    }
-                }
-
+                contains = new HashSet<char>(group.Split("\n").Select(e=>e.ToCharArray()).SelectMany(x => x));
+                
                 if (!solutionTwo) sum += contains.Count;
                 else
                 {
@@ -41,7 +35,6 @@ namespace AdventOfCode
                         if (group.Count(e => e == character) == group.Split("\n").Count()) sum++;
                     }
                 }
-                contains = new HashSet<char>();
             }
             
 
