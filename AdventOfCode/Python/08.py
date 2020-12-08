@@ -7,7 +7,7 @@ import aoc_utils
 import queue
 def main():
     lines = aoc_utils.readlines()
-    yield "Answer to part 1 is:" + str(process(lines))
+    yield "Part 1:" + str(process(lines))
     for x in range(len(lines)):
         if lines[x][0:3] == "nop":
             lines[x] = "jmp" + lines[x][3:]
@@ -26,7 +26,7 @@ def process(lines):
     index = 0
     while True:
         if index < 0 or index >= len(lines):
-            return str(accumulator) + " success"
+            return "Part 2:" + str(accumulator)
         instruction = lines[index]
         if done[index]:
             return accumulator

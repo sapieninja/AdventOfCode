@@ -14,6 +14,13 @@ def readlines(removeEnd = True):
         lines = file.readlines()
     if removeEnd: lines = [line.strip() for line in lines]
     return removeEmpties(lines)
+def readSplittedLine(separator):
+    with open(input_path,"r") as file:
+        text = file.read()
+    return removeEmpties(text.split(separator))
+def readSplittedIntLine(separator):
+    items = readSplittedLine(separator)
+    return map(int,items)
 def readParagraphs():
     with open(input_path,"r") as file:
         text = file.read()
