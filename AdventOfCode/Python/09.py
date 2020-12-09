@@ -27,7 +27,7 @@ def findsumofrange(value,ints):
 def sumto(value,list):
     for x in list:
         for y in list:
-            if x + y == value:
+            if x + y == value and x != y:
                 return True
     return False
 print(main())
