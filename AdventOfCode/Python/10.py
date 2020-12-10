@@ -19,8 +19,8 @@ def main():
     print(noways(inputsints,-1,max(inputsints) + 3 ))
     return no_one*no_three
 def noways(inputs,start_digit,maximum):
-    #if start_digit in cache:
-    #    return cache[start_digit]
+    if start_digit in cache:
+        return cache[start_digit]
     no = 0
     if start_digit == -1:
         start = 0
