@@ -16,8 +16,8 @@ def main():
     for x in range(len(inputsints)-1):
         if inputsints[x+1] - inputsints[x] == 1: no_one += 1
         elif inputsints[x+1] - inputsints[x] == 3: no_three += 1
-    print(noways(inputsints,-1,max(inputsints) + 3 ))
-    return no_one*no_three
+    print("Part One: ",no_one*no_three)
+    print("Part Two: ",noways(inputsints,-1,max(inputsints) + 3 ))
 def noways(inputs,start_digit,maximum):
     if start_digit in cache:
         return cache[start_digit]
@@ -31,4 +31,4 @@ def noways(inputs,start_digit,maximum):
             no += noways(inputs,inputs.index(start+x),maximum)
     cache[start_digit] = no
     return no
-print(main())
+main()

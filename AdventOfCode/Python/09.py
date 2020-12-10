@@ -12,8 +12,8 @@ def main():
         value = ints[x]
         previous = ints[x-25:x]
         if not sumto(value,previous):
-            print(findsumofrange(value,ints))
-            return value
+            print("Part One:",value)
+            print("Part Two:",findsumofrange(value,ints))
 def findsumofrange(value,ints):
     for x in range(len(ints)-1):
         sum = ints[x]
@@ -30,4 +30,4 @@ def sumto(value,list):
             if x + y == value and x != y:
                 return True
     return False
-print(main())
+main()
