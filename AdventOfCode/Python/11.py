@@ -24,6 +24,17 @@ def main():
             if y == "#":
                 count+=1
     print(count)
+def generatenextcoords(x,y,xplus,yplus,inputs):
+    yield (x + xplus,y+yplus)
+    while True:
+        x += xplus;y += yplus
+        try:
+            if(x<0 or y < 0):
+                break
+            inputs[x][y]
+            yield (x,y)
+        except:
+            break
 def step(inputs):
     length = len(inputs[0])
     newlist = [x for x in inputs]
@@ -44,14 +55,46 @@ def step(inputs):
                 if y != 0:
                     yminus = True
                 else:yminus = False
-                if xplus and yplus:nearby.append(inputs[x+1][y+1])
-                if xplus:nearby.append(inputs[x+1][y])
-                if xplus and yminus:nearby.append(inputs[x+1][y-1])
-                if yplus:nearby.append(inputs[x][y+1])
-                if yminus:nearby.append(inputs[x][y-1])
-                if xminus and yplus:nearby.append(inputs[x-1][y+1])
-                if xminus:nearby.append(inputs[x-1][y])
-                if xminus and yminus:nearby.append(inputs[x-1][y-1])
+                if xplus and yplus:
+                    try:
+                        nearby.append(inputs[(a:=next(x for x in generatenextcoords(x,y,1,1,inputs) if inputs[x[0]][x[1]]!="."))[0]][a[1]])
+                    except:
+                        pass
+                if xplus:
+                    try:
+                        nearby.append(inputs[(a:=next(x for x in generatenextcoords(x,y,1,0,inputs) if inputs[x[0]][x[1]]!="."))[0]][a[1]])
+                    except:
+                        pass
+                if xplus and yminus:
+                    try:
+                        nearby.append(inputs[(a:=next(x for x in generatenextcoords(x,y,1,-1,inputs) if inputs[x[0]][x[1]]!="."))[0]][a[1]])
+                    except:
+                        pass
+                if yplus:
+                    try:
+                        nearby.append(inputs[(a:=next(x for x in generatenextcoords(x,y,0,1,inputs) if inputs[x[0]][x[1]]!="."))[0]][a[1]])
+                    except:
+                        pass
+                if yminus:
+                    try:
+                        nearby.append(inputs[(a:=next(x for x in generatenextcoords(x,y,0,-1,inputs) if inputs[x[0]][x[1]]!="."))[0]][a[1]])
+                    except:
+                        pass
+                if xminus and yplus:
+                    try:
+                        nearby.append(inputs[(a:=next(x for x in generatenextcoords(x,y,-1,1,inputs) if inputs[x[0]][x[1]]!="."))[0]][a[1]])
+                    except:
+                        pass
+                if xminus:
+                    try:
+                        nearby.append(inputs[(a:=next(x for x in generatenextcoords(x,y,-1,0,inputs) if inputs[x[0]][x[1]]!="."))[0]][a[1]])
+                    except:
+                        pass
+                if xminus and yminus:
+                    try:
+                        nearby.append(inputs[(a:=next(x for x in generatenextcoords(x,y,-1,-1,inputs) if inputs[x[0]][x[1]]!="."))[0]][a[1]])
+                    except:
+                        pass
                 if "#" in nearby:
                     continue;
                 else: newlist[x] = newlist[x][:y] + "#" + newlist[x][y+1:]
@@ -70,16 +113,48 @@ def step(inputs):
                 if y != 0:
                     yminus = True
                 else:yminus = False
-                if xplus and yplus:nearby.append(inputs[x+1][y+1])
-                if xplus:nearby.append(inputs[x+1][y])
-                if xplus and yminus:nearby.append(inputs[x+1][y-1])
-                if yplus:nearby.append(inputs[x][y+1])
-                if yminus:nearby.append(inputs[x][y-1])
-                if xminus and yplus:nearby.append(inputs[x-1][y+1])
-                if xminus:nearby.append(inputs[x-1][y])
-                if xminus and yminus:nearby.append(inputs[x-1][y-1])
+                if xplus and yplus:
+                    try:
+                        nearby.append(inputs[(a:=next(x for x in generatenextcoords(x,y,1,1,inputs) if inputs[x[0]][x[1]]!="."))[0]][a[1]])
+                    except:
+                        pass
+                if xplus:
+                    try:
+                        nearby.append(inputs[(a:=next(x for x in generatenextcoords(x,y,1,0,inputs) if inputs[x[0]][x[1]]!="."))[0]][a[1]])
+                    except:
+                        pass
+                if xplus and yminus:
+                    try:
+                        nearby.append(inputs[(a:=next(x for x in generatenextcoords(x,y,1,-1,inputs) if inputs[x[0]][x[1]]!="."))[0]][a[1]])
+                    except:
+                        pass
+                if yplus:
+                    try:
+                        nearby.append(inputs[(a:=next(x for x in generatenextcoords(x,y,0,1,inputs) if inputs[x[0]][x[1]]!="."))[0]][a[1]])
+                    except:
+                        pass
+                if yminus:
+                    try:
+                        nearby.append(inputs[(a:=next(x for x in generatenextcoords(x,y,0,-1,inputs) if inputs[x[0]][x[1]]!="."))[0]][a[1]])
+                    except:
+                        pass
+                if xminus and yplus:
+                    try:
+                        nearby.append(inputs[(a:=next(x for x in generatenextcoords(x,y,-1,1,inputs) if inputs[x[0]][x[1]]!="."))[0]][a[1]])
+                    except:
+                        pass
+                if xminus:
+                    try:
+                        nearby.append(inputs[(a:=next(x for x in generatenextcoords(x,y,-1,0,inputs) if inputs[x[0]][x[1]]!="."))[0]][a[1]])
+                    except:
+                        pass
+                if xminus and yminus:
+                    try:
+                        nearby.append(inputs[(a:=next(x for x in generatenextcoords(x,y,-1,-1,inputs) if inputs[x[0]][x[1]]!="."))[0]][a[1]])
+                    except:
+                        pass
                 amount = len([x for x in nearby if x=="#"])
-                if amount >= 4:
+                if amount >= 5:
                     newlist[x] = newlist[x][:y] + "L" + newlist[x][y+1:]
     return newlist
         
