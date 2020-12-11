@@ -15,7 +15,6 @@ def main():
         if inputs == old_inputs:
             break
         old_inputs = [x for x in inputs]
-        print("NEXT ITERATION")
     count = 0
     for x in inputs:
         for y in x:
