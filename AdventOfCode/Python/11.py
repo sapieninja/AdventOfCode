@@ -12,8 +12,6 @@ def main():
     old_inputs = [x for x in inputs]
     while True:
         inputs = step(inputs)
-        for y in (x for x in inputs):
-            print(y)
         if inputs == old_inputs:
             break
         old_inputs = [x for x in inputs]
