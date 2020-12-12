@@ -3,10 +3,10 @@
 import os.path
 from __main__ import __file__
 day = os.path.basename(__file__)[0:2]
-path = os.path.dirname(__file__)
+path = os.path.dirname(os.path.realpath(__file__))
 input_path = path[0:-7] + "/Inputs/" + day + ".txt"
 if(not os.path.isfile(input_path)): #downloads the file if (and only if) it does not exist
-    os.system(f"cd {path};cd ..;advent")
+    os.system(f"cd {path};ls;cd ..;advent")
 def removeEmpties(inputList):
     return [line for line in inputList if line!=""]
 def readlines(removeEnd = True):
