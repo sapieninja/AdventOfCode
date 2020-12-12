@@ -10,45 +10,14 @@ import functools
 from copy import deepcopy
 def solve(part2 = False):
     inputs = aoc_utils.readlines()
-    de = 0
-    dn = 0
-    if part2:
-        dn = 1
-        de = 10
-    sn = 0
-    se = 0
-    directions = ["E", "S", "W", "N"]
-    direction = 0
+    de,dn,sn,se,direction,directions = 10 if part2 else 0,1 if part2 else 0,0,0,0,list("ESWN")
     for x in inputs:
-        if x[0] == "F" and not part2:
-            x = directions[(direction//90)%4] + x[1:]
-        choice = x[0]
-        number = int(re.search('\d+',x).group())
-        if choice == "N": dn += number
-        if choice == "S": dn -= number
-        if choice == "E": de += number
-        if choice == "W": de -= number
-        if choice == "L" and not part2: direction -= number
-        if choice == "R"and not part2: direction += number
-        if choice == "L" and part2: (de,dn) = rotate(de,dn,number,True)
-        if choice == "R" and part2: (de,dn) = rotate(de,dn,number)
-        if choice == "F" and part2:
-            se += number * de
-            sn += number * dn
-    if part2: return abs(sn) + abs(se)
-    return abs(de) + abs(dn)
-def rotate(de,dn,degrees,l = False):
-    degrees //= 90
-    for x in range(degrees):
-        if not l:
-            temp = dn
-            dn = -de
-            de = temp
-        else:
-            temp = dn
-            dn = de
-            de = -temp
-    return (de,dn)
-print("Part 1:",solve())
-print("Part 2:",solve(True))
+        if x[0] == "F" and not part2: x = directions[(direction//90)%4] + x[1:]
+        dn,de,direction,se,sn= dn + int(x[1:]) if x[0] == "N" else (dn -int(x[1:]) if x[0] == "S" else dn),de + int(x[1:]) if x[0] == "E" else (de-int(x[1:]) if x[0] == "W" else de),direction + int(x[1:]) if (x[0] == "R" and not part2) else (direction - int(x[1:]) if x[0] == "L" else direction),se+de*int(x[1:]) if (x[0] == "F" and part2) else se,sn+dn*int(x[1:]) if (x[0] == "F" and part2) else sn
+        if x[0] == "L" and part2: 
+            for y in range(int(x[1:])//90):de,dn = -dn,de
+        elif x[0] == "R" and part2:
+            for y in range(int(x[1:])//90): de,dn = dn,-de
+    return abs(sn) + abs(se) if part2 else abs(de) + abs(dn)
+print("Part 1:",solve(),"\nPart 2:",solve(True))
 
