@@ -1,0 +1,1 @@
+ocomplete plugins (YouCompleteMe, nvim-completion-manager, asyncomplete, deoplete etc.) I settled with nvim-completion-manager 2, because of the fuzzy matching, reliability with showing up when backspacing, the 

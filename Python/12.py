@@ -20,4 +20,3 @@ def solve(part2 = False):
             for y in range(int(x[1:])//90): de,dn = dn,-de
     return abs(sn) + abs(se) if part2 else abs(de) + abs(dn)
 print("Part 1:",solve(),"\nPart 2:",solve(True))
-
