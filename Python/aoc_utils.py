@@ -6,6 +6,8 @@ def readlines(removeEnd = True):
     lines = fileinput.input()
     if removeEnd: lines = [line.strip() for line in lines]
     return removeEmpties(lines)
+def readints():
+    return list(map(int,readlines()))
 def read():
     output = ""
     for x in readlines():
