@@ -35,6 +35,7 @@ for x in lines:
             for z in binxv:
                 workingvar = workingvar.replace('X',z,1)
             addresses[int(workingvar,2)] = int(wvalue)
+        print(addresses)
     else:
         mask = x.split()[2] 
 print(sum(addresses.values()))
