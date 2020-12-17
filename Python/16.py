@@ -33,9 +33,7 @@ for x in ot:
     for y in x:
         io = False
         for rule in rules:
-            if y >= rule[1][0] and y <= rule[1][1]:
-                io = True
-            if y >= rule[2][0] and y <= rule[2][1]:
+            if y >= rule[1][0] and y <= rule[1][1] or y >= rule[2][0] and y <= rule[2][1]:
                 io = True
         if io == False:
             output +=y 
@@ -43,10 +41,7 @@ for x in ot:
     if tg == True:
         gt.append(x)
 print(output)
-co = [[] for x in range(len(gt[0]))]
-for y in gt:
-    for x in range(len(y)):
-        co[x].append(y[x])
+co = zip(*reversed(gt))
 wo = []
 for x in co:
     wf = []
