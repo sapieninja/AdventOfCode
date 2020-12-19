@@ -27,9 +27,10 @@ def main(part2=False):
         dic["11"]= dic["11"] + " | 42 11 31"
         output = ""
         for x in range(1,20):
-            v1 = "(42)"*x
-            v2 = "(31)"*x
+            v1 = " 42 "*x
+            v2 = " 31 "*x
             output += f"{v1}{v2}|"
+        output = output[:-1]
     def reval(matchobj):
         value = matchobj.group(0)
         if value != "8" and value != "11" or not part2:
@@ -43,6 +44,13 @@ def main(part2=False):
     while re.search(nums,rout):
         rout = re.sub(nums,reval,rout)
     rout = re.compile(rout.replace(" ","") + "$")
-    print(len([line for line in lines if re.match(rout,line)]))
+    count = 0
+    for line in ms:
+        if re.match(rout,line):
+            print("     MATCHED         :",line)
+            count += 1
+        else:
+            print("     NOT MATCHED     :",line)
+    print(count)
 main()
 main(True)
