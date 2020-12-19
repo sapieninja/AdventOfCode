@@ -10,7 +10,7 @@ class T:
 
 def main():
     part2 = True
-    with open("18.sm") as f:
+    with open("input_data.txt") as f:
         inp = f.read()
     # with open("example_input.txt") as f:
     #     inp = f.read()
@@ -20,10 +20,10 @@ def main():
     for line in lines:
         for d in range(10):
             line = line.replace(f"{d}", f"T({d})")
+            print(line)
         line = line.replace("*", "-")
         if part2:
             line = line.replace("+", "*")
-        print(line)
         t += eval(line, {"T": T}).v
     print(t)
 
