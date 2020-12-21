@@ -17,8 +17,6 @@ for line in lines:
     if line.count(":") == 1:
         line = line.split(":")
         dic[line[0]] = line[1]
-        if line[1].count('a') == 1: dic[line[0]] = 'a'
-        elif line[1].count('b') == 1:dic[line[0]] = 'b'
     else:
         ms.append(line)
 def main(part2=False):
@@ -43,7 +41,7 @@ def main(part2=False):
     rout = dic["0"]
     while re.search(nums,rout):
         rout = re.sub(nums,reval,rout)
-    rout = re.compile(rout.replace(" ","") + "$")
+    rout = re.compile(rout.replace(" ","").replace('"','') + "$")
     count = 0
     for line in ms:
         if re.match(rout,line):
