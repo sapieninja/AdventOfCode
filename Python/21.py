@@ -26,9 +26,7 @@ for x in lines:
         elif x.count(")") == 1:
             pa.append(x[:-1])
     P.append((ingredients,pa))
-print(P)
 ti = list(itertools.chain.from_iterable([[ingredient for ingredient in x[0]] for x in P]))
-print(ti)
 di = {}
 for line in P:
     print(line[1])
@@ -37,9 +35,9 @@ for line in P:
             di[allergen] = set(line[0])
         else:
             di[allergen] = set(line[0]).intersection(di[allergen])
+print(di)
 dang = {}
 while len(di) != 0:
-    print(dang,di)
     success = False
     for x in di:
         if len(di[x]) == 1:
