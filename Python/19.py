@@ -2,7 +2,7 @@ from collections import *
 import itertools
 import random
 import re
-import sys
+import sys 
 import aoc_utils
 import queue
 from operator import *
@@ -19,10 +19,9 @@ for line in lines:
         dic[line[0]] = line[1]
     else:
         ms.append(line)
+print(dic)
 def main(part2=False):
     if part2:
-        dic["8"] = dic["8"] + " | 42 8"
-        dic["11"]= dic["11"] + " | 42 11 31"
         output = ""
         for x in range(1,20):
             v1 = " 42 "*x
