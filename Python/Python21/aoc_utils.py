@@ -16,8 +16,8 @@ def read():
 def readSplittedLine(separator):
     text = read()
     return removeEmpties(text.split(separator))
-def readSplittedIntLine(separator):
-    items = readSplittedLine(separator)
+def readSplittedIntLine():
+    items = readSplittedLine(",")
     return list(map(int,items))
 def readParagraphs():
     text = read()

@@ -13,5 +13,3 @@ lines = aoc_utils.readlines()
 for line in lines:
     pass
 #actual code goes down here
-
-
