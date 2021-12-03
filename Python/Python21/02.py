@@ -1,13 +1,5 @@
 import aoc_utils
-import itertools
-import functools
-import operator
 import networkx
-import math
-from collections import *
-from copy import deepcopy
-import random
-import re
 lines = aoc_utils.readlines()
 x = 0
 y = 0
@@ -22,5 +14,6 @@ for line in lines:
         aim-=int(line.split()[1])
     if line.startswith("backward"):
         x-=int(line.split()[1])
-print(x,y)
-print(x*y)
+print("Part 1:", x*aim)
+print("Part 2",  x*y  )
+
