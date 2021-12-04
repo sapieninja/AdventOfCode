@@ -5,7 +5,7 @@ def removeEmpties(inputList):
 def readlines(removeEnd = True):
     lines = fileinput.input()
     if removeEnd: lines = [line.strip() for line in lines]
-    return removeEmpties(lines)
+    return lines
 def readints():
     return list(map(int,readlines()))
 def read():
@@ -20,8 +20,9 @@ def readSplittedIntLine():
     items = readSplittedLine(",")
     return list(map(int,items))
 def readParagraphs():
-    text = read()
+    text = ""
+    for line in readlines():
+        text += line + "\n"
     sections = text.split("\n\n")
-    sections = [section.replace("\n", " ") for section in sections]
     return removeEmpties(sections)
 

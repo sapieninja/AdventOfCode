@@ -1,6 +1,7 @@
 import aoc_utils
 import itertools
 import functools
+from functools import cache
 import operator
 import networkx
 import math
@@ -28,5 +29,5 @@ def elimination(nums,operator):
         nums = list(filter(lambda num:operator(num[x],digit),nums))
         if len(nums) == 1:
             return int(nums[0],2)
-print("Part 1", int(getmostcommon(nums),2) * (2**len(nums[0])-int(getmostcommon(nums),2)-1))
+print("Part 1:", int(getmostcommon(nums),2) * (2**len(nums[0])-int(getmostcommon(nums),2)-1))
 print("Part 2:", elimination(deepcopy(nums),operator.eq)*elimination(deepcopy(nums),operator.ne))
