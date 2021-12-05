@@ -41,9 +41,7 @@ for line in lines[1:]:
         groups[-1].append(list(map(int, line.split())))
 for number in numbers:
     for group in groups:
-        for line in group:
-            if number in line:
-                line[line.index(number)] = -1
+        group = list(map(lambda line: line[line.index(number)] = -1,group))
     for group in groups:
         if checkwin(group):
             calcscore(group, number)

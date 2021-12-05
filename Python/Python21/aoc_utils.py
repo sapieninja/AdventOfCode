@@ -24,5 +24,6 @@ def readParagraphs():
     for line in readlines():
         text += line + "\n"
     sections = text.split("\n\n")
+    sections = [section.split("\n") for section in sections]
     return removeEmpties(sections)
 
