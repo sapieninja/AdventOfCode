@@ -1,18 +1,11 @@
 import aoc_utils
-import itertools
-import functools
-import operator
-import networkx
-import math
+import sys
 from collections import *
-from copy import deepcopy
-import random
-import re
 nums = aoc_utils.readSplittedIntLine()
 density = defaultdict(int)
+nums.sort()
 for x in nums:
     density[x] += 1
-print(density)
 for x in range(256):
     for key in range(-1,max(density)):
         density[key] = density[key+1]

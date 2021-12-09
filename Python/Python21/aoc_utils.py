@@ -1,6 +1,6 @@
 # Code for custom input parsing from the input file. 
 import fileinput 
-def removeEmpties(inputList):
+def removeempties(inputList):
     return [line for line in inputList if line!=""]
 def readlines(removeEnd = True):
     lines = fileinput.input()
@@ -13,13 +13,13 @@ def read():
     for x in readlines():
         output += x
     return output
-def readSplittedLine(separator):
+def readsplittedline(separator):
     text = read()
     return removeEmpties(text.split(separator))
-def readSplittedIntLine():
+def readsplittedintline():
     items = readSplittedLine(",")
     return list(map(int,items))
-def readParagraphs():
+def readparagraphs():
     text = ""
     for line in readlines():
         text += line + "\n"

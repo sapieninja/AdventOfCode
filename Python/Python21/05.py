@@ -12,7 +12,6 @@ import time
 lines = aoc_utils.readlines()
 density = defaultdict(int)
 for line in lines:
-    print(lines.index(line)/500)
     a, b = line.split(" -> ")
     a = list(map(int, (a.split(","))))
     b = list(map(int, (b.split(","))))
