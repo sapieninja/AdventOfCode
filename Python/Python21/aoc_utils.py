@@ -6,6 +6,11 @@ def readlines(removeEnd = True):
     lines = fileinput.input()
     if removeEnd: lines = [line.strip() for line in lines]
     return lines
+def numericgrid():
+    lines = readlines()
+    for x in range(len(lines)):
+        lines[x] = list(map(int,list(lines[x]))) 
+    return lines
 def readints():
     return list(map(int,readlines()))
 def read():
