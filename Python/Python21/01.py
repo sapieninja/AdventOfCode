@@ -22,4 +22,5 @@ for x in range(len(nums)-2):
     if nums[x] + nums[x+1] + nums[x+2] > prev:
         p2 += 1
     prev = nums[x] + nums[x+1] + nums[x+2]
+print(sum(x<y for x,y in zip(nums,nums[3:])))
 print(p1,p2)
