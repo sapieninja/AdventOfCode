@@ -10,8 +10,7 @@ import re
 lines = aoc_utils.readlines()
 scanners = []
 for line in lines:
-    if line.startswith("---"):
-        scanners.append([])
+    if line.startswith("---"): scanners.append([])
     elif line != "":
         line = line.split(",")
         line = tuple(map(int,line))
@@ -67,6 +66,7 @@ while len(found) != len(scanners):
                     tested.add((p,i))
                     continue
                 else:
+                    print(p,"=>",i)
                     toadd = rotateandtransform(scanners[i],output[1],output[2],output[0])
                     poses.add(output[0])
                     scanners[i] = toadd
