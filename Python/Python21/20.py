@@ -36,11 +36,9 @@ def pprint(g):
         print()
         for y in x:
             print(y,end="")
-for x in range(200):
+for x in range(25):
     g = enhance(g,0)
-    pprint(g)
-    g = enhance(g,1 if enhancement[0] == "#" else 0)
-    pprint(g)
+    g = enhance(g,1)
     if x == 0:
         total = 0
         for i in range(len(g)):
@@ -54,4 +52,3 @@ for i in range(len(g)):
         if g[i][p] =="#":
             total += 1
 print(total)
-pprint(g)
