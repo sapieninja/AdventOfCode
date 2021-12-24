@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <time.h>
 long cachea[10000000];
 long cacheb[10000000];
 int amalgamate(int posa, int posb, int scorea, int scoreb)
@@ -15,15 +16,9 @@ int amalgamate(int posa, int posb, int scorea, int scoreb)
 void noways(int posa, int posb, int scorea, int scoreb, long *aways, long *bways, int rolls[])
 //aways and bways are pointers so two values can be returned
 {
-    int amalgamation;
+    int amalgamation,amalgatron;
     amalgamation = amalgamate(posa, posb, scorea, scoreb);
-    if (cachea[amalgamation] != 0)
-    {
-        *aways = cachea[amalgamation];
-        *bways = cacheb[amalgamation];
-        return;
-    }
-    if (cacheb[amalgamation] != 0)
+    if (cachea[amalgamation] != 0 || cacheb[amalgamation] != 0)
     {
         *aways = cachea[amalgamation];
         *bways = cacheb[amalgamation];
@@ -32,20 +27,12 @@ void noways(int posa, int posb, int scorea, int scoreb, long *aways, long *bways
     long totala = 0;
     long totalb = 0;
     long aget, bget;
-    if (scorea >= 21)
+    if (scorea >= 40 || scoreb >= 40)
     {
         *aways = 1;
         *bways = 0;
         cachea[amalgamation] = 1;
         cacheb[amalgamation] = 0;
-        return;
-    }
-    if (scoreb >= 21)
-    {
-        *aways = 0;
-        *bways = 1;
-        cachea[amalgamation] = 0;
-        cacheb[amalgamation] = 1;
         return;
     }
     for (int i = 0; i < 27; i++)
@@ -63,8 +50,11 @@ void noways(int posa, int posb, int scorea, int scoreb, long *aways, long *bways
 int main()
 {
     int rolls[] = {3, 4, 4, 4, 5, 5, 5, 5, 5, 5, 6, 6, 6, 6, 6, 6, 6, 7, 7, 7, 7, 7, 7, 8, 8, 8, 9};
+    clock_t start,end;
+    start = clock();
     long aways, bways;
     noways(10, 1, 0, 0, &aways, &bways, rolls);
+    end = clock();
     if (aways>bways)
     {
         printf("%ld\n",aways);
@@ -73,4 +63,6 @@ int main()
     {
         printf("%ld\n",bways);
     }
+    double cpu_time_used = ((double) (end - start)) / CLOCKS_PER_SEC;
+    printf("%f\n",cpu_time_used);
 }
