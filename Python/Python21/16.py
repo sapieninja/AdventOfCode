@@ -1,7 +1,7 @@
 import aoc_utils
 import itertools
 import functools
-import operator
+from operator import *
 import networkx
 import math
 from collections import *
@@ -31,194 +31,50 @@ def vn(packet):
         return (int(out,2),len(packet))
 
 
+    else:
+        subpackets = []
+        i = int(packet[0])
+        print("parsing mode",i,int(packet[1:16],2),int(packet[1:12],2))
+        if i == 0:
+            l = int(packet[0:16],2)
+            packet = packet[16:]
+            totake = packet[0:l]
+            offset = len(packet) - l
+            packet = packet[l:]
+            while l>0:
+                value,remaining = vn(totake)
+                l-=(len(totake)-remaining)
+                subpackets.append(value)
+                totake = totake[-remaining:]
+        else:
+            l = int(packet[1:12],2)
+            packet = packet[12:]
+            for i in range(l):
+                value,remaining = vn(packet)
+                packet = packet[-remaining:]
+                if remaining == 0:
+                    packet = ""
+                subpackets.append(value)
+    output = 0 
     if t == 0:
-        output = 0
-        i = int(packet[0])
-        print("parsing mode",i,int(packet[1:16],2),int(packet[1:12],2))
-        if i == 0:
-            l = int(packet[0:16],2)
-            packet = packet[16:]
-            totake = packet[0:l]
-            offset = len(packet) - l
-            packet = packet[l:]
-            while l>0:
-                version,remaining = vn(totake)
-                l-=(len(totake)-remaining)
-                output += version
-                totake = totake[-remaining:]
-        else:
-            l = int(packet[1:12],2)
-            packet = packet[12:]
-            for i in range(l):
-                version,remaining = vn(packet)
-                packet = packet[-remaining:]
-                if remaining == 0:
-                    packet = ""
-                output += version
+        output = sum(subpackets)
     if t == 1:
-        output = 1
-        i = int(packet[0])
-        print("parsing mode",i,int(packet[1:16],2),int(packet[1:12],2))
-        if i == 0:
-            l = int(packet[0:16],2)
-            packet = packet[16:]
-            totake = packet[0:l]
-            offset = len(packet) - l
-            packet = packet[l:]
-            while l>0:
-                version,remaining = vn(totake)
-                l-=(len(totake)-remaining)
-                output *= version
-                totake = totake[-remaining:]
-        else:
-            l = int(packet[1:12],2)
-            packet = packet[12:]
-            for i in range(l):
-                version,remaining = vn(packet)
-                packet = packet[-remaining:]
-                if remaining == 0:
-                    packet = ""
-                output *= version
+        output = math.prod(subpackets)
     if t == 2:
-        output = 10000000000000000
-        i = int(packet[0])
-        print("parsing mode",i,int(packet[1:16],2),int(packet[1:12],2))
-        if i == 0:
-            l = int(packet[0:16],2)
-            packet = packet[16:]
-            totake = packet[0:l]
-            offset = len(packet) - l
-            packet = packet[l:]
-            while l>0:
-                version,remaining = vn(totake)
-                l-=(len(totake)-remaining)
-                if version < output:
-                    output = version
-                totake = totake[-remaining:]
-        else:
-            l = int(packet[1:12],2)
-            packet = packet[12:]
-            for i in range(l):
-                version,remaining = vn(packet)
-                packet = packet[-remaining:]
-                if remaining == 0:
-                    packet = ""
-                if version < output:
-                    output = version
+        output = min(subpackets)
     if t == 3:
-        output = 0
-        i = int(packet[0])
-        print("parsing mode",i,int(packet[1:16],2),int(packet[1:12],2))
-        if i == 0:
-            l = int(packet[0:16],2)
-            packet = packet[16:]
-            totake = packet[0:l]
-            offset = len(packet) - l
-            packet = packet[l:]
-            while l>0:
-                version,remaining = vn(totake)
-                l-=(len(totake)-remaining)
-                if version > output:
-                    output = version
-                totake = totake[-remaining:]
-        else:
-            l = int(packet[1:12],2)
-            packet = packet[12:]
-            for i in range(l):
-                version,remaining = vn(packet)
-                packet = packet[-remaining:]
-                if remaining == 0:
-                    packet = ""
-                if version > output:
-                    output = version
+        output = max(subpackets)
     if t == 5:
-        output = []
-        i = int(packet[0])
-        print("parsing mode",i,int(packet[1:16],2),int(packet[1:12],2))
-        if i == 0:
-            l = int(packet[0:16],2)
-            packet = packet[16:]
-            totake = packet[0:l]
-            offset = len(packet) - l
-            packet = packet[l:]
-            while l>0:
-                version,remaining = vn(totake)
-                l-=(len(totake)-remaining)
-                output.append(version)
-                totake = totake[-remaining:]
-        else:
-            l = int(packet[1:12],2)
-            packet = packet[12:]
-            for i in range(l):
-                version,remaining = vn(packet)
-                packet = packet[-remaining:]
-                if remaining == 0:
-                    packet = ""
-                output.append(version)
-        if output[0] > output[1]:
-            output = 1
-        else:
-            output = 0
-    if t == 6:
-        output = []
-        i = int(packet[0])
-        print("parsing mode",i,int(packet[1:16],2),int(packet[1:12],2))
-        if i == 0:
-            l = int(packet[0:16],2)
-            packet = packet[16:]
-            totake = packet[0:l]
-            offset = len(packet) - l
-            packet = packet[l:]
-            while l>0:
-                version,remaining = vn(totake)
-                l-=(len(totake)-remaining)
-                output.append(version)
-                totake = totake[-remaining:]
-        else:
-            l = int(packet[1:12],2)
-            packet = packet[12:]
-            for i in range(l):
-                version,remaining = vn(packet)
-                packet = packet[-remaining:]
-                if remaining == 0:
-                    packet = ""
-                output.append(version)
-        if output[0] < output[1]:
-            output = 1
-        else:
-            output = 0
-    if t == 7:
-        output = []
-        i = int(packet[0])
-        print("parsing mode",i,int(packet[1:16],2),int(packet[1:12],2))
-        if i == 0:
-            l = int(packet[0:16],2)
-            packet = packet[16:]
-            totake = packet[0:l]
-            offset = len(packet) - l
-            packet = packet[l:]
-            while l>0:
-                version,remaining = vn(totake)
-                l-=(len(totake)-remaining)
-                output.append(version)
-                totake = totake[-remaining:]
-        else:
-            l = int(packet[1:12],2)
-            packet = packet[12:]
-            for i in range(l):
-                version,remaining = vn(packet)
-                packet = packet[-remaining:]
-                if remaining == 0:
-                    packet = ""
-                output.append(version)
-        if output[0] == output[1]:
-            output = 1
-        else:
-            output =  0
+        output = subpackets[0] > subpackets[1]
+    if t==6:
+        output = subpackets[0] < subpackets[1] 
+    if t==7:
+        output = subpackets[0] == subpackets[1]
+
 
     return (output,len(packet)) #give the output and the number of bits left for other parsers
 into = bin(int(msg,16))[2:]
 into = into.zfill(len(msg)*4)
 print(into)
-print(vn(into))
+print(vn(into)[0])
 

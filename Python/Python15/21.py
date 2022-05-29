@@ -12,12 +12,14 @@ def win(points,damage,armour,enemypoints,enemydamage,enemyarmour):
         if attack <= 0:
             attack = 1
         enemypoints-=attack
+        print(enemypoints)
         if enemypoints <= 0:
             return True
         attack = enemydamage - armour
         if attack <= 0:
             attack = 1
         points-=attack
+        print(points)
         if points <= 0:
             return False
 points = 100
@@ -43,4 +45,5 @@ for weapon in weapons:
                     damage += rings[ringx][0]
                 if win(points,damage,defense,enemypoints,enemydamage,enemyarmour):
                     costs.add(weapon+armourc+sum(ringsc))
+print(win(8,5,5,12,7,2))
 print(min(costs))
