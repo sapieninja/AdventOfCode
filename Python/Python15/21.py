@@ -1,7 +1,7 @@
 import itertools
 enemypoints = 104
 enemydamage = 8
-enemyarmour = 4
+enemyarmour = 1
 weapons = {8:(4,0),10:(5,0),25:(6,0),40:(7,0),74:(8,0)}
 armour =  {0:(0,0),13:(0,1),31:(0,2),53:(0,3),75:(0,4),102:(0,5)}
 rings ={25:(1,0),50:(2,0),100:(3,0),20:(0,1),40:(0,2),80:(0,3)}
@@ -32,8 +32,8 @@ for weapon in weapons:
                 defense = 0
                 damage += weapons[weapon][0]
                 defense+= armour[armourc][1]
-                if win(points,damage,defense,enemypoints,enemydamage,enemyarmour):
-                    costs.add(weapon+armourc+sum(ringsc))
+                if not win(points,damage,defense,enemypoints,enemydamage,enemyarmour):
+                    costs.add(weapon+armourc)
             for ringsc in itertools.combinations(rings,r):
                 print(ringsc)
                 damage = 0
@@ -43,7 +43,7 @@ for weapon in weapons:
                 for ringx in ringsc:
                     defense += rings[ringx][1]
                     damage += rings[ringx][0]
-                if win(points,damage,defense,enemypoints,enemydamage,enemyarmour):
+                if not win(points,damage,defense,enemypoints,enemydamage,enemyarmour):
                     costs.add(weapon+armourc+sum(ringsc))
 print(win(8,5,5,12,7,2))
-print(min(costs))
+print(max(costs))
