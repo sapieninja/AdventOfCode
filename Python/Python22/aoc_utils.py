@@ -2,33 +2,46 @@
 import fileinput 
 def removeEmpties(inputList):
     return [line for line in inputList if line!=""]
-def readlines(removeEnd = True):
+def readLines(removeEnd = True):
     lines = fileinput.input()
     if removeEnd: lines = [line.strip() for line in lines]
     return lines
-def numericgrid():
-    lines = removeEmpties(readlines())
-    for x in range(len(lines)):
-        lines[x] = list(map(int,list(lines[x]))) 
-    return lines
-def readints():
-    return list(map(int,readlines()))
+def numericGrid(separator = ","):
+    splittedLines = readSplittedLines()
+    return [list(map(int,x)) for x in splittedLines]
+def readInts():
+    return list(map(int,readLines()))
 def read():
     output = ""
-    for x in readlines():
+    for x in readLines():
         output += x
     return output
-def readsplittedline(separator):
+def readSplittedLine(separator):
     text = read()
     return removeEmpties(text.split(separator))
-def readsplittedintline():
+def readSplittedIntLine():
     items = readSplittedLine(",")
     return list(map(int,items))
-def readparagraphs():
+def readSplittedLines(separator=",") -> list[list[str]]:
+    lines = readLines()
+    toReturn : list[list[str]] = [line.split(separator) for line in lines]
+    return toReturn
+def readParagraphs():
     text = ""
-    for line in readlines():
+    for line in readLines():
         text += line + "\n"
     sections = text.split("\n\n")
     sections = [removeEmpties(section.split("\n")) for section in sections]
     return removeEmpties(sections)
-
+def readIntParagraphs() -> list[list[int]]:
+    paragraphs = readParagraphs()
+    toReturn = []
+    for paragraph in paragraphs:
+        toReturn.append(list(map(int,paragraph)))
+    return toReturn
+#evil demon function that is kind of useful
+def convInt(into): 
+    try:
+        return int(into)
+    except:
+        return [convInt(i) for i in into]
