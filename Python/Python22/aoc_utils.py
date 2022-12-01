@@ -1,13 +1,13 @@
 # Code for custom input parsing from the input file. 
 import fileinput 
-def removeempties(inputList):
+def removeEmpties(inputList):
     return [line for line in inputList if line!=""]
 def readlines(removeEnd = True):
     lines = fileinput.input()
     if removeEnd: lines = [line.strip() for line in lines]
     return lines
 def numericgrid():
-    lines = readlines()
+    lines = removeEmpties(readlines())
     for x in range(len(lines)):
         lines[x] = list(map(int,list(lines[x]))) 
     return lines
@@ -29,6 +29,6 @@ def readparagraphs():
     for line in readlines():
         text += line + "\n"
     sections = text.split("\n\n")
-    sections = [section.split("\n") for section in sections]
+    sections = [removeEmpties(section.split("\n")) for section in sections]
     return removeEmpties(sections)
 
