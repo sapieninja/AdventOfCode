@@ -2,7 +2,7 @@
 import fileinput 
 def removeEmpties(inputList):
     return [line for line in inputList if line!=""]
-def readLines(removeEnd = True):
+def readLines(removeEnd = True) -> list[str]:
     lines = fileinput.input()
     if removeEnd: lines = [line.strip() for line in lines]
     return lines
