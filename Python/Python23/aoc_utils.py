@@ -7,7 +7,7 @@ def readLines(removeEnd = True) -> list[str]:
     if removeEnd: lines = [line.strip() for line in lines]
     return lines
 def numericGrid(separator = ","):
-    splittedLines = readSplittedLines()
+    splittedLines = readSplittedLines(separator)
     return [list(map(int,x)) for x in splittedLines]
 def readInts():
     return list(map(int,readLines()))
